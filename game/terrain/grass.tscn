@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://assets/tileset/grassland_tiles.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Grass1" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 0, 0, 64, 32 )
+
+[node name="Grass2" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 64, 0, 64, 32 )
+
+

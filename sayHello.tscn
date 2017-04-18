@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://sayHello.gd" type="Script" id=1]
-[ext_resource path="res://Label.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://game/player/player.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Panel\n\n# class member variables go here, for example:\n# var a = 2\n# var b = \"textvar\"\n\nfunc _ready():\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tget_node(\"Button\").connect(\"pressed\", self, \"_on_Button_pressed\");\n\tpass\n\n\nfunc _on_Button_pressed():\n\tget_node(\"Button\").set_text(\"Hello\");\n\tpass # replace with function body\n"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Label\n\n# class member variables go here, for example:\n# var a = 2\n# var b = \"textvar\"\n\nvar acc = 0;\n\nfunc _ready():\n\t# Called every time the node is added to the scene.\n\t# Initialization here\n\tset_process(true);\n\tpass\n\nfunc _process(delta):\n\tacc += delta;\n\tset_text(str(acc));"
 
 [node name="Panel" type="Panel"]
 
@@ -14,7 +21,7 @@ margin/left = 400.0
 margin/top = 177.0
 margin/right = 835.0
 margin/bottom = 401.0
-script/script = ExtResource( 1 )
+script/script = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 
@@ -30,7 +37,7 @@ text = "Time: "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 2 )
+script/script = SubResource( 2 )
 
 [node name="Button" type="Button" parent="."]
 
@@ -46,10 +53,14 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Click Me!"
-icon = ExtResource( 3 )
+icon = ExtResource( 1 )
 flat = false
 
 [node name="Node" type="Node" parent="."]
+
+[node name="Area2D" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( -45.4294, -23.2687 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 
